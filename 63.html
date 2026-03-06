@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neurologic Trauma – Chapter 63 Exam</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(145deg, #4a6172, #779bb0);
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+        }
+        
+        .container {
+            width: 100vw;
+            height: 100vh;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 0 40px rgba(0,0,0,0.3);
+        }
+        
+        .header {
+            background: linear-gradient(145deg, #38505f, #62869c);
+            color: white;
+            padding: 20px 30px;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 85px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            border-bottom: 4px solid #233a47;
+        }
+        
+        .header-content {
+            flex: 1;
+        }
+        
+        .header h1 {
+            font-size: 1.6rem;
+            margin: 0;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.95;
+            margin-top: 5px;
+            font-weight: 500;
+        }
+        
+        .counter {
+            background: rgba(255,255,255,0.2);
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            min-width: 100px;
+            text-align: center;
+            white-space: nowrap;
+            margin-left: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(5px);
+        }
+        
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background: #c3d8e7;
+            flex-shrink: 0;
+            position: relative;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, #62869c, #38505f);
+            height: 100%;
+            width: 0%;
+            transition: width 0.4s ease;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            padding: 30px;
+            background: #deeaf3;
+        }
+        
+        .question-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            border: 3px solid #abc6db;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+        
+        .question-header {
+            display: flex;
+            gap: 25px;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+        
+        .question-number {
+            background: linear-gradient(145deg, #62869c, #38505f);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            font-weight: bold;
+            flex-shrink: 0;
+            box-shadow: 0 6px 20px rgba(56,80,95,0.4);
+        }
+        
+        .question-text {
+            font-size: 1.4rem;
+            line-height: 1.7;
+            color: #233a47;
+            flex-grow: 1;
+            font-weight: 600;
+            padding-right: 15px;
+        }
+        
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .option {
+            padding: 20px;
+            border: 3px solid #abc6db;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 1.15rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .option:hover {
+            background: #cddff0;
+            border-color: #62869c;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(98,134,156,0.15);
+        }
+        
+        .option-letter {
+            background: linear-gradient(145deg, #62869c, #38505f);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            border: 3px solid #38505f;
+        }
+        
+        .option.correct {
+            background: linear-gradient(145deg, #66bb6a, #43a047);
+            border-color: #43a047;
+            color: white;
+        }
+        
+        .option.correct .option-letter {
+            background: #43a047;
+            color: white;
+            border-color: #388e3c;
+        }
+        
+        .option.incorrect {
+            background: linear-gradient(145deg, #ef5350, #e53935);
+            border-color: #e53935;
+            color: white;
+        }
+        
+        .option.incorrect .option-letter {
+            background: #e53935;
+            color: white;
+            border-color: #d32f2f;
+        }
+        
+        .feedback-area {
+            flex-shrink: 0;
+        }
+        
+        .feedback {
+            padding: 25px;
+            border-radius: 15px;
+            display: none;
+            align-items: center;
+            gap: 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            animation: slideIn 0.3s ease;
+            margin-bottom: 20px;
+        }
+        
+        .feedback.correct {
+            background: linear-gradient(145deg, #c8e6c9, #a5d6a7);
+            border: 3px solid #43a047;
+            color: #1b5e20;
+            display: flex;
+        }
+        
+        .feedback.incorrect {
+            background: linear-gradient(145deg, #ffcdd2, #ef9a9a);
+            border: 3px solid #e53935;
+            color: #b71c1c;
+            display: flex;
+        }
+        
+        .feedback-icon {
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+        
+        .rationale {
+            background: linear-gradient(145deg, #d7e6f3, #c3d8e7);
+            border: 3px solid #4a6172;
+            border-radius: 15px;
+            padding: 25px;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+        
+        .rationale.show {
+            display: block;
+        }
+        
+        .rationale h4 {
+            color: #38505f;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.3rem;
+        }
+        
+        .rationale p {
+            color: #233a47;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background: #abc6db;
+            border-top: 3px solid #90b2cd;
+            flex-shrink: 0;
+            height: 80px;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .btn {
+            padding: 15px 35px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(145deg, #62869c, #38505f);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(56,80,95,0.4);
+            background: linear-gradient(145deg, #38505f, #233a47);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(145deg, #90a4ae, #607d8b);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(96,125,139,0.4);
+            background: linear-gradient(145deg, #607d8b, #455a64);
+        }
+        
+        .btn-cancel {
+            background: linear-gradient(145deg, #ef5350, #e53935);
+            color: white;
+            display: none;
+        }
+        
+        .btn-cancel:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(229,57,53,0.4);
+            background: linear-gradient(145deg, #e53935, #c62828);
+        }
+        
+        .btn-cancel.show {
+            display: flex;
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                height: 75px;
+                padding: 15px 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.3rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .option {
+                padding: 15px;
+                font-size: 1.05rem;
+                gap: 15px;
+            }
+            
+            .option-letter {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            .question-area {
+                padding: 20px;
+            }
+            
+            .navigation {
+                padding: 15px 20px;
+                height: 70px;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            
+            .nav-buttons {
+                gap: 10px;
+            }
+        }
+        
+        @media (max-height: 700px) {
+            .header {
+                height: 70px;
+                padding: 15px 20px;
+            }
+            
+            .question-area {
+                padding: 20px;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .option {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="header-content">
+            <h1>🧠 Neurologic Trauma (Chapter 63)</h1>
+            <div class="subtitle">40 NCLEX-style questions with rationales</div>
+        </div>
+        <div class="counter" id="counter">1/40</div>
+    </div>
+    
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    
+    <div class="main-content">
+        <div class="question-area">
+            <div class="question-header">
+                <div class="question-number" id="questionNumber">1</div>
+                <div class="question-text" id="question"></div>
+            </div>
+            
+            <div class="options-container" id="options"></div>
+        </div>
+        
+        <div class="feedback-area">
+            <div class="feedback" id="feedback">
+                <div class="feedback-icon" id="feedbackIcon"></div>
+                <div id="feedbackText"></div>
+            </div>
+            <div class="rationale" id="rationale">
+                <h4>📘 RATIONALE:</h4>
+                <p id="rationaleText"></p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="navigation">
+        <button class="btn btn-secondary" id="prevBtn" onclick="previousCard()">
+            ⬅️ Previous
+        </button>
+        <div class="nav-buttons">
+            <button class="btn btn-cancel" id="cancelBtn" onclick="cancelSelection()">
+                ❌ Cancel
+            </button>
+            <button class="btn btn-primary" id="nextBtn" onclick="nextCard()">
+                Next ➡️
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Chapter 63: Management of Patients with Neurologic Trauma – 40 questions (exact from document)
+    const questions = [
+        {
+            id: 1,
+            question: "1. The emergency room (ER) nurse is caring for a client who has been brought in by ambulance after sustaining a fall at home. What physical assessment finding(s) are suggestive of a basilar skull fracture? Select all that apply",
+            options: [
+                "A. Epistaxis",
+                "B. Swelling of the tongue and lips",
+                "C. Bruising over the mastoid",
+                "D. Unilateral facial numbness",
+                "E. Severe back pain"
+            ],
+            correct: [0,2], // A, C
+            rationale: "Fractures of the base of the skull tend to traverse the paranasal sinus of the frontal bone or the middle ear located in the temporal bone. Therefore, they frequently produce hemorrhage from the nose (epistaxis), pharynx, or ears, and blood may appear under the conjunctiva. An area of ecchymosis (bruising) may be seen over the mastoid (Battle sign). Pain is usually localized to the area of injury and swelling of the tongue and lips may have been the result of direct impact of the face due to the fall or an anaphylactic reaction of some type. Numbness on one side of the face is not a typical finding in basilar skull fractures. (PTS:1 REF:p.2057)"
+        },
+        {
+            id: 2,
+            question: "2. A client is brought to the trauma center by ambulance after sustaining a high cervical spinal cord injury 1½ hours ago. Endotracheal intubation has been deemed necessary and the nurse is preparing to assist. What nursing diagnosis should the nurse associate with this procedure?",
+            options: [
+                "A. Risk for impaired skin integrity",
+                "B. Risk for injury",
+                "C. Risk for autonomic dysreflexia",
+                "D. Risk for suffocation"
+            ],
+            correct: 1, // B
+            rationale: "If endotracheal intubation is necessary, extreme care is taken to avoid flexing or extending the client's neck, which can result in extension of a cervical injury. Intubation does not directly cause autonomic dysreflexia and the threat to skin integrity is not a primary concern. Intubation does not carry the potential to cause suffocation. (PTS:1 REF:p.2077)"
+        },
+        {
+            id: 3,
+            question: "3. A nurse is caring for a critically ill client with autonomic dysreflexia. What clinical manifestations would the nurse expect in this client?",
+            options: [
+                "A. Respiratory distress and projectile vomiting",
+                "B. Bradycardia and hypertension",
+                "C. Tachycardia and agitation",
+                "D. Third-spacing and hyperthermia"
+            ],
+            correct: 1, // B
+            rationale: "Autonomic dysreflexia is characterized by a pounding headache, profuse sweating, nasal congestion, piloerection ('goose bumps'), bradycardia, and hypertension. It occurs in cord lesions above T6 after spinal shock has resolved; it does not result in vomiting, tachycardia, or third-spacing. (PTS:1 REF:p.2078)"
+        },
+        {
+            id: 4,
+            question: "4. The nurse is caring for a client with increased intracranial pressure (ICP) caused by a traumatic brain injury. Which of the following clinical manifestations would suggest that the client may be experiencing increased brain compression causing brain stem damage?",
+            options: [
+                "A. Hyperthermia",
+                "B. Tachycardia",
+                "C. Hypertension",
+                "D. Bradypnea"
+            ],
+            correct: 0, // A
+            rationale: "Signs of increasing ICP include slowing of the heart rate (bradycardia), increasing systolic BP, and widening pulse pressure. As brain compression increases, respirations become rapid, BP may decrease, and the pulse slows further. A rapid rise in body temperature is regarded as unfavorable. Hyperthermia increases the metabolic demands of the brain and may indicate brain stem damage. (PTS:1 REF:p.2065)"
+        },
+        {
+            id: 5,
+            question: "5. A client is brought to the ED by family after falling off the roof. The care team suspects an epidural hematoma, prompting the nurse to anticipate for which priority intervention?",
+            options: [
+                "A. Insertion of an intracranial monitoring device",
+                "B. Treatment with antihypertensives",
+                "C. Making openings in the skull",
+                "D. Administration of anticoagulant therapy"
+            ],
+            correct: 2, // C
+            rationale: "An epidural hematoma is considered an extreme emergency. Marked neurologic deficit or respiratory arrest can occur within minutes. Treatment consists of making an opening through the skull to decrease ICP emergently, remove the clot, and control the bleeding. Antihypertensive medications would not be a priority. Anticoagulant therapy should not be prescribed for a client who has a cranial bleed. This could further increase bleeding activity. Insertion of an intracranial monitoring device may be done during the surgery, but is not priority for this client. (PTS:1 REF:p.2059)"
+        },
+        {
+            id: 6,
+            question: "6. The staff educator is precepting a nurse new to the critical care unit when a client with a T2 spinal cord injury is admitted. The client is soon exhibiting manifestations of neurogenic shock. In addition to monitoring the client closely, what would be the nurse's most appropriate action?",
+            options: [
+                "A. Prepare to transfuse packed red blood cells.",
+                "B. Prepare for interventions to increase the client's BP.",
+                "C. Place the client in the Trendelenburg position.",
+                "D. Prepare an ice bath to lower core body temperature."
+            ],
+            correct: 1, // B
+            rationale: "Manifestations of neurogenic shock include decreased BP and heart rate. Cardiac markers would be expected to rise in cardiogenic shock. Transfusion, repositioning, and ice baths are not indicated interventions. (PTS:1 REF:p.2076)"
+        },
+        {
+            id: 7,
+            question: "7. An ED nurse has just received a call from EMS that they are transporting a 17-year-old client who has just sustained a spinal cord injury (SCI). The nurse recognizes that the most common cause of this type of injury is what event?",
+            options: [
+                "A. Syncope (fainting)",
+                "B. Suicide attempts",
+                "C. Workplace injuries",
+                "D. Motor vehicle accidents"
+            ],
+            correct: 3, // D
+            rationale: "The most common causes of SCIs are motor vehicle crashes, falls, violence, and sports. (PTS:1 REF:p.2070)"
+        },
+        {
+            id: 8,
+            question: "8. A nurse has a client with a spinal cord injury and is tailoring their care plan to prevent the major causes of death for this client. The nurse's care plan includes assisted coughing techniques, a sequential compression device, and prevention of pressure injuries. Which are the most likely possible causes of death for this client?",
+            options: [
+                "A. Pneumonia, pulmonary embolism, and sepsis",
+                "B. Cardiac tamponade, hypoxia, and malnutrition",
+                "C. Oxygen toxicity in paralytic ileus and electrolyte imbalances",
+                "D. Seizures, osteomyelitis, and urinary tract infections"
+            ],
+            correct: 0, // A
+            rationale: "The nurse is assisting the client with assisted coughing to prevent pneumonia. Pulmonary infections are managed and prevented by frequent coughing, turning, and deep breathing exercises and chest physiotherapy; aggressive respiratory care and suctioning of the airway if a tracheostomy is present; assisted coughing as needed; and adequate hydration. Low-dose anticoagulation therapy usually is initiated to prevent DVT (deep vein thrombosis) and PE (pulmonary embolism), along with the use of anti-embolism stockings or sequential pneumatic compression devices (SCDs). Pressure injuries have the potential complication of sepsis, osteomyelitis, and fistulas. All of the other listed causes may occur in clients with SCI but are not the main causes of death. The interventions discussed above directly assist in the prevention of pneumonia, pulmonary embolism osteomyelitis and sepsis. (PTS:1 REF:p.2070)"
+        },
+        {
+            id: 9,
+            question: "9. Paramedics have brought an intubated client to the RD following a head injury due to acceleration-deceleration motor vehicle accident. Increased ICP is suspected. Appropriate nursing interventions would include which of the following?",
+            options: [
+                "A. Keep the head of the bed (HOB) flat at all times.",
+                "B. Teach the client to perform the Valsalva maneuver.",
+                "C. Administer benzodiazepines on a PRN basis.",
+                "D. Perform endotracheal suctioning every hour."
+            ],
+            correct: 2, // C
+            rationale: "If the client with a brain injury is very agitated, benzodiazepines are the most commonly used sedatives and do not affect cerebral blood flow or ICP. The HOB should be elevated 30 degrees. Suctioning should be done on a limited basis, due to increasing pressure in the cranium. The Valsalva maneuver is to be avoided. This also causes increased ICP. (PTS:1 REF:p.2060)"
+        },
+        {
+            id: 10,
+            question: "10. A client who has sustained a nondepressed skull fracture is admitted to the acute medical unit. Nursing care should include which of the following?",
+            options: [
+                "A. Preparation for emergency craniotomy",
+                "B. Watchful waiting and close monitoring",
+                "C. Administration of inotropic drugs",
+                "D. Fluid resuscitation"
+            ],
+            correct: 1, // B
+            rationale: "Nondepressed skull fractures generally do not require surgical treatment; however, close observation of the client is essential. A craniotomy would not likely be needed if the fracture is nondepressed. Even if treatment is warranted, it is unlikely to include inotropes or fluid resuscitation. (PTS:1 REF:p.2057)"
+        },
+        {
+            id: 11,
+            question: "11. A client who suffered a spinal cord injury is experiencing an exaggerated autonomic response. What aspect of the client's current health status is most likely to have precipitated this event?",
+            options: [
+                "A. The client received a blood transfusion.",
+                "B. The client's analgesia regimen was recently changed.",
+                "C. The client was not repositioned during the night shift.",
+                "D. The client's urinary catheter became occluded."
+            ],
+            correct: 3, // D
+            rationale: "A distended bladder is the most common cause of autonomic dysreflexia. Infrequent positioning is a less likely cause, although pressure ulcers or tactile stimulation can cause it. Changes in medications or blood transfusions are unlikely causes. (PTS:1 REF:p.2078)"
+        },
+        {
+            id: 12,
+            question: "12. A 35-year-old client is being admitted to the intensive care unit (ICU) for increased observation with a brain injury and is awake, alert, and disoriented to time and situation. The client sustained a fall from a roof, and x-rays are pending. The nurse would anticipate which supportive priority measures for this client?",
+            options: [
+                "A. Seizure prophylaxis and prevention",
+                "B. Cervical and spinal immobilization",
+                "C. Fluid and electrolyte maintenance,",
+                "D. Intubation and mechanical ventilation"
+            ],
+            correct: 1, // B
+            rationale: "Any client with a head injury is presumed to have a cervical spine injury until proven otherwise. The client is transported from the scene of the injury on a board with the head and neck maintained in alignment with the axis of the body. A cervical collar should be applied and maintained until cervical spine x-rays have been obtained and the absence of cervical SCI (spinal cord injury) documented. This client's x-rays were pending so spinal precautions should be maintained and are the priority. Primary injury to the brain is defined as the consequence of direct contact to the head/brain during the instant of initial injury, causing extracranial focal injuries. The greatest opportunity for decreasing TBI (traumatic brain injury) is the implementation of prevention strategies. Treatment for clients with suspected increased intracranial pressure (ICP) also includes ventilator support, seizure prevention, fluid and electrolyte maintenance, nutritional support, and management of pain and anxiety. Clients who are comatose are intubated and mechanically ventilated to ensure adequate oxygenation and to protect their airway. No information was provided on current ICP. The client was not fully orientated so he/she was transferred to the ICU for closer monitoring. (PTS:1 REF:p.2060)"
+        },
+        {
+            id: 13,
+            question: "13. A client with a head injury has been increasingly agitated and the nurse has consequently identified a risk for injury. What is the nurse's best intervention for preventing injury?",
+            options: [
+                "A. Restrain the client as ordered.",
+                "B. Administer opioids PRN as prescribed.",
+                "C. Arrange for friends and family members to sit with the client.",
+                "D. Pad the side rails of the client's bed."
+            ],
+            correct: 3, // D
+            rationale: "To protect the client from self-injury, the nurse uses padded side rails. The nurse should avoid restraints, because straining against them can increase ICP or cause other injury. Narcotics used to control restless clients should be avoided because these medications can depress respiration, constrict the pupils, and alter the client's responsiveness. Visitors should be limited if the client is agitated. (PTS:1 REF:p.2065)"
+        },
+        {
+            id: 14,
+            question: "14. A client with a C5 spinal cord injury has tetraplegia. After being moved out of the ICU, the client reports a severe throbbing headache. What should the nurse do first?",
+            options: [
+                "A. Check the client's indwelling urinary catheter for kinks to ensure patency.",
+                "B. Lower the HOB to improve perfusion.",
+                "C. Administer PRN analgesia as prescribed.",
+                "D. Reassure the client that headaches are expected during recovery from spinal cord injuries."
+            ],
+            correct: 0, // A
+            rationale: "A severe throbbing headache is a common symptom of autonomic dysreflexia, which occurs after injuries to the spinal cord above T6. The syndrome is usually brought on by sympathetic stimulation, such as bowel and bladder distention. Lowering the HOB can increase ICP. Before administering analgesia, the nurse should check the client's catheter, record vital signs, and perform an abdominal assessment. A severe throbbing headache is a dangerous symptom in this client and is not expected. (PTS:1 REF:p.2057)"
+        },
+        {
+            id: 15,
+            question: "15. A client is admitted to the neurologic ICU with a spinal cord injury. When assessing the client the nurse notes there is a sudden depression of reflex activity in the spinal cord below the level of injury. What should the nurse suspect?",
+            options: [
+                "A. Epidural hemorrhage",
+                "B. Hypertensive emergency",
+                "C. Spinal shock",
+                "D. Hypovolemia"
+            ],
+            correct: 2, // C
+            rationale: "In spinal shock, the reflexes are absent, BP and heart rate fall, and respiratory failure can occur. Hypovolemia, hemorrhage, and hypertension do not cause this sudden change in neurologic function. (PTS:1 REF:p.2075)"
+        },
+        {
+            id: 16,
+            question: "16. A client sustained a head injury as a result of trauma. The health care provider has instituted seizure prophylactic measures. The nurse anticipates which specific measures being initiated for this client?",
+            options: [
+                "A. Antiemetic medications on day three of injury",
+                "B. Aspiration precautions on day four of injury",
+                "C. Intubation and ventilator support on day one of injury",
+                "D. Anticonvulsant medications on day two of injury"
+            ],
+            correct: 3, // D
+            rationale: "Clients with head injury are at an increased risk for posttraumatic seizures. Posttraumatic seizures are classified as immediate (within 24 hours after injury), early (within 1 to 7 days after injury), or late (more than 7 days after injury). Seizure prophylaxis is the practice of administering anticonvulsant medications to clients with head injury to prevent seizures. It is important to prevent posttraumatic seizures, especially in the immediate and early phases of recovery, because seizures may increase ICP and decrease oxygenation. All of the other interventions are not part of the seizure prophylactic protocol nor have a specific timeline of administration. (PTS:1 REF:p.2068)"
+        },
+        {
+            id: 17,
+            question: "17. The nurse is assessing a client with a spinal cord injury that reports a severe headache with a rapid onset. The nurse knows that this could be a symptom of which complication of a spinal cord injury?",
+            options: [
+                "A. Autonomic dysreflexia",
+                "B. Spinal shock",
+                "C. Retinal hemorrhage",
+                "D. Myocardial infarction"
+            ],
+            correct: 0, // A
+            rationale: "The client is likely suffering from an episode of autonomic dysreflexia which triggers an autonomic–hyper-response. Autonomic dysreflexia occurs after spinal shock, not due to it. Retinal hemorrhage and MI occur if autonomic dysreflexia is not resolved. (PTS:1 REF:p.2078)"
+        },
+        {
+            id: 18,
+            question: "18. A nurse is reviewing the trend of a client's scores on the Glasgow Coma Scale (GCS). This provides what potential information to the nurse about the client's status?",
+            options: [
+                "A. The client's level of knowledge about preceding events",
+                "B. An assessment of the client's current level of consciousness",
+                "C. An assessment of the client's lowest verbal and physical response to stimuli",
+                "D. An in-depth and real-time neurological assessment of the client's condition"
+            ],
+            correct: 1, // B
+            rationale: "The Glasgow Coma Scale (GCS) examines three responses related to level of consciousness (LOC): eye opening, best verbal response, and best motor response. It is particularly useful for monitoring changes during the acute phase, the first few days after a head injury. It does not take the place of an in-depth neurologic assessment and does not provide knowledge about proceeding events. (PTS:1 REF:p.2062)"
+        },
+        {
+            id: 19,
+            question: "19. The nurse is caring for a client who is rapidly progressing toward brain death. The nurse should be aware of what cardinal sign(s) of brain death? Select all that apply.",
+            options: [
+                "A. Absence of pain response",
+                "B. Apnea",
+                "C. Coma",
+                "D. Absence of brain stem reflexes",
+                "E. Absence of deep tendon reflexes"
+            ],
+            correct: [1,2,3], // B, C, D
+            rationale: "The three cardinal signs of brain death upon clinical examination are coma, the absence of brain stem reflexes, and apnea. Absences of pain response and deep tendon reflexes are not necessarily indicative of brain death. (PTS:1 REF:p.2061)"
+        },
+        {
+            id: 20,
+            question: "20. Following a spinal cord injury, a client is placed in halo traction. While performing pin site care, the nurse notes that one of the traction pins has become detached. The nurse would be correct in implementing what priority nursing action?",
+            options: [
+                "A. Complete the pin site care to decrease risk of infection.",
+                "B. Notify the neurosurgeon of the occurrence.",
+                "C. Stabilize the head in a lateral position.",
+                "D. Reattach the pin to prevent further head trauma."
+            ],
+            correct: 1, // B
+            rationale: "If one of the pins became detached, the head is stabilized in neutral position by one person while another notifies the neurosurgeon. Reattaching the pin as a nursing intervention would not be done due to risk of increased injury. Pin site care would not be a priority in this instance. Prevention of neurologic injury is the priority. (PTS:1 REF:p.2078)"
+        },
+        {
+            id: 21,
+            question: "21. The ED is notified that a 6-year-old child is in transit with a suspected brain injury after being struck by a car. The child is unresponsive at this time, but vital signs are within acceptable limits. What will be the primary goal of initial therapy?",
+            options: [
+                "A. Promoting adequate circulation",
+                "B. Treating the child's increased ICP",
+                "C. Assessing secondary brain injury",
+                "D. Preserving brain homeostasis"
+            ],
+            correct: 3, // D
+            rationale: "All therapy is directed toward preserving brain homeostasis and preventing secondary brain injury, which is injury to the brain that occurs after the original traumatic event. The scenario does not indicate the child has increased ICP or a secondary brain injury at this point. Promoting circulation is likely secondary to the broader goal of preserving brain homeostasis. (PTS:1 REF:p.2060)"
+        },
+        {
+            id: 22,
+            question: "22. A client is admitted to the neurologic intensive care unit (ICU) with a suspected diffuse axonal injury. Which primary neuroimaging diagnostic tool would be used on this client to evaluate the brain structure?",
+            options: [
+                "A. Magnetic resonance imaging (MRI)",
+                "B. Positron emission tomography (PET) scan",
+                "C. X-ray of the head",
+                "D. Ultrasound of the head"
+            ],
+            correct: 0, // A
+            rationale: "Computed tomography (CT) and MRI scans are the primary neuroimaging diagnostic tools, and are both useful and sensitive in evaluating the brain structure for this particular injury. Diffuse axonal injury (DAI) results from widespread shearing and rotational forces that produce damage throughout the brain—to axons in the cerebral hemispheres, corpus callosum, and brain stem. Ultrasound or x-rays of the skull can show structure, ventricles, blood vessels, and fractures, but are not the preferred method of diagnosing this condition. PET scan can help reveal the metabolic or biochemical function of tissues and organs and is utilized at some trauma centers, but is not the standard choice to diagnose this condition. (PTS:1 REF:p.2060)"
+        },
+        {
+            id: 23,
+            question: "23. A 13-year-old was brought to the ED after being hit in the head by a baseball and is subsequently diagnosed with a concussion. Which assessment finding would rule out discharging the client?",
+            options: [
+                "A. The client reports a headache.",
+                "B. The client reports pain at the site where the ball hits his head.",
+                "C. The client is visibly fatigued.",
+                "D. The client's speech is slightly slurred."
+            ],
+            correct: 3, // D
+            rationale: "Slurred speech would indicate a need for further assessment and observation due to the possibility of more serious trauma. Localized pain, a headache and fatigue are consistent with a concussion and do not necessarily require further intervention. (PTS:1 REF:p.2060)"
+        },
+        {
+            id: 24,
+            question: "24. An 82-year-old client is admitted for observation after a fall. Due to the client's age, the nurse knows that the client is at increased risk for what complication of his injury?",
+            options: [
+                "A. Hematoma",
+                "B. Skull fracture",
+                "C. Embolus",
+                "D. Stroke"
+            ],
+            correct: 0, // A
+            rationale: "Two major factors place older adults at increased risk for hematomas. First, the dura becomes more adherent to the skull with increasing age. Second, many older adults take aspirin and anticoagulants as part of routine management of chronic conditions. Because of these factors, the client's risk of a hematoma is likely greater than that of stroke, embolism, or skull fracture. Strokes are more common among older adults, but not typically as a complication of falls. (PTS:1 REF:p.2058)"
+        },
+        {
+            id: 25,
+            question: "25. The nurse in the intensive care unit (ICU) is using the neurological assessment flow chart to evaluate a calm client with traumatic brain injury (TBI) that has several medications infusing. Which medication would best allow an accurate assessment of the client's neurological status?",
+            options: [
+                "A. Lorazepam",
+                "B. Benzodiazepines",
+                "C. Propofol",
+                "D. Midazolam"
+            ],
+            correct: 2, // C
+            rationale: "Propofol, a sedative hypnotic agent that is supplied in an intralipid emulsion for intravenous (IV) use, is the sedative of choice. It is an ultra-short acting, rapid onset drug with elimination half-life of less than an hour. It has a major advantage of being titratable to its desired clinical effect but still provides the opportunity for an accurate neurologic assessment. Lorazepam and midazolam are frequently used but have active metabolites that may cause prolonged sedation, making it difficult to conduct a neurologic assessment. Benzodiazepines are the most commonly used sedative agents for agitated clients and do not affect cerebral blood flow or ICP. Benzodiazepines produce a calming effect, which may impact a neurological assessment's findings. (PTS:1 REF:p.2061)"
+        },
+        {
+            id: 26,
+            question: "26. The nurse planning the care of a client with head injuries is addressing the client's nursing diagnosis of 'sleep deprivation.' What action should the nurse implement?",
+            options: [
+                "A. Administer a benzodiazepine at bedtime each night.",
+                "B. Do not disturb the client between 2200 and 0600.",
+                "C. Cluster overnight nursing activities to minimize disturbances.",
+                "D. Ensure that the client does not sleep during the day."
+            ],
+            correct: 2, // C
+            rationale: "To allow the client longer times of uninterrupted sleep and rest, the nurse can group nursing care activities so that the client is disturbed less frequently. However, it is impractical and unsafe to provide no care for an 8-hour period. The use of benzodiazepines should be avoided. (PTS:1 REF:p.2066)"
+        },
+        {
+            id: 27,
+            question: "27. The nurse has implemented interventions aimed at facilitating family coping in the care of a client with a traumatic brain injury. How can the nurse best facilitate family coping?",
+            options: [
+                "A. Help the family understand that the client could have died.",
+                "B. Emphasize the importance of accepting the client's new limitations.",
+                "C. Have the members of the family plan the client's inclient care.",
+                "D. Assist the family in setting appropriate short-term goals."
+            ],
+            correct: 3, // D
+            rationale: "Helpful interventions to facilitate coping include providing family members with accurate and honest information and encouraging them to continue to set well-defined, short-term goals. Stating that a client's condition could be worse downplays their concerns. Emphasizing the importance of acceptance may not necessarily help the family accept the client's condition. Family members cannot normally plan a client's hospital care, although they may contribute to the care in some ways. (PTS:1 REF:p.2066)"
+        },
+        {
+            id: 28,
+            question: "28. The school nurse is giving a presentation on preventing spinal cord injuries (SCI). What should the nurse identify as prominent risk factors for SCI? Select all that apply.",
+            options: [
+                "A. Young age",
+                "B. Frequent travel",
+                "C. African American race",
+                "D. Male gender",
+                "E. Alcohol or drug use"
+            ],
+            correct: [0,3,4], // A, D, E
+            rationale: "The predominant risk factors for SCI include young age, male gender, and alcohol and drug use. Ethnicity and travel are not risk factors. (PTS:1 REF:p.2070)"
+        },
+        {
+            id: 29,
+            question: "29. The school nurse has been called to the football field, where a player is laying immobile on the field after landing awkwardly on his head during a play. While awaiting an ambulance, what action should the nurse perform?",
+            options: [
+                "A. Ensure that the player is not moved.",
+                "B. Obtain the player's vital signs, if possible.",
+                "C. Perform a rapid assessment of the player's range of motion.",
+                "D. Assess the player's reflexes."
+            ],
+            correct: 0, // A
+            rationale: "At the scene of the injury, the client must be immobilized on a spinal (back) board, with the head and neck maintained in a neutral position, to prevent an incomplete injury from becoming complete. This is a priority over determining the client's vital signs. It would be inappropriate to test ROM or reflexes. (PTS:1 REF:p.2072)"
+        },
+        {
+            id: 30,
+            question: "30. The nurse is caring for a client whose spinal cord injury has caused recent muscle spasticity. What medication should the nurse expect to be prescribed to control this?",
+            options: [
+                "A. Baclofen",
+                "B. Dexamethasone",
+                "C. Mannitol",
+                "D. Phenobarbital"
+            ],
+            correct: 0, // A
+            rationale: "Baclofen is classified as an antispasmodic agent in the treatment of muscle spasms related to spinal cord injury. Decadron is an anti-inflammatory medication used to decrease inflammation in both SCI and head injury. Mannitol is used to decrease cerebral edema in clients with head injury. Phenobarbital is an anticonvulsant that is used in the treatment of seizure activity. (PTS:1 REF:p.2084)"
+        },
+        {
+            id: 31,
+            question: "31. The nurse is planning the care of a client with a T1 spinal cord injury. The nurse has identified the diagnosis of 'risk for impaired skin integrity.' How can the nurse best address this risk?",
+            options: [
+                "A. Change the client's position frequently.",
+                "B. Provide a high-protein diet.",
+                "C. Provide light massage at least daily.",
+                "D. Teach the client deep breathing and coughing exercises."
+            ],
+            correct: 0, // A
+            rationale: "Frequent position changes are among the best preventative measures against pressure ulcers. A high-protein diet can benefit wound healing, but does not necessarily prevent skin breakdown. Light massage and deep breathing do not protect or restore skin integrity. (PTS:1 REF:p.2082)"
+        },
+        {
+            id: 32,
+            question: "32. A client with a spinal cord injury has experienced several hypotensive episodes. How can the nurse best address the client's risk for orthostatic hypotension?",
+            options: [
+                "A. Administer an IV bolus of normal saline prior to repositioning.",
+                "B. Maintain bed rest until normal BP regulation returns.",
+                "C. Monitor the client's BP before and during position changes.",
+                "D. Allow the client to initiate repositioning."
+            ],
+            correct: 2, // C
+            rationale: "To prevent hypotensive episodes, close monitoring of vital signs before and during position changes is essential. Prolonged bed rest carries numerous risks and it is not possible to provide a bolus before each position change. Following the client's lead may or may not help regulate BP. (PTS:1 REF:p.2079)"
+        },
+        {
+            id: 33,
+            question: "33. A nurse on the neurologic unit is providing care for a client who has spinal cord injury at the level of C4. When planning the client's care, what aspect of the client's neurologic and functional status should the nurse consider?",
+            options: [
+                "A. Inability to use a wheelchair",
+                "B. Unable to swallow liquid and solid food",
+                "C. Incontinent in bowel movements",
+                "D. Requires full assistance for elimination"
+            ],
+            correct: 3, // D
+            rationale: "Clients with a lesion at C4 are fully dependent for elimination. The client is dependent for feeding, but is able to swallow. The client will be capable of using an electric wheelchair. (PTS:1 REF:p.2074)"
+        },
+        {
+            id: 34,
+            question: "34. A nurse has received an unconscious client with a traumatic brain injury (TBI). The nurse is concerned about the client's skin integrity and implements interventions to prevent pressure injuries. Which action should the nurse implement during the shift?",
+            options: [
+                "A. Assessing all body surfaces and documenting skin integrity every 8 hours",
+                "B. Turning and repositioning the client every 6 hours",
+                "C. Providing skin care with barrier care ointments once a day",
+                "D. Assisting the client to get out of bed to a chair four times a day."
+            ],
+            correct: 0, // A
+            rationale: "Clients with TBI often require assistance in turning and positioning because of immobility or unconsciousness. Prolonged pressure on the tissues decreases circulation and leads to tissue necrosis. Specific nursing measures include the following: Assessing all body surfaces and documenting skin integrity every 8 hours. Turning and repositioning the client should occur every 2 hours. Skin care should be done every 4 hours and includes more than applying an ointment. Other interventions include keeping the skin dry, offloading bony prominences and with pillows or wedge devices. Since this client is unconscious; assisting the client to get out of bed needs his/her cooperation which is not possible. It should also be three times a day and not four. (PTS:1 REF:p.2066)"
+        },
+        {
+            id: 35,
+            question: "35. The nurse caring for a client with a spinal cord injury notes that the client is exhibiting early signs and symptoms of disuse syndrome. Which of the following is the most appropriate nursing action?",
+            options: [
+                "A. Limit the amount of assistance provided with ADLs.",
+                "B. Collaborate with the physical therapist and immobilize the client's extremities temporarily.",
+                "C. Increase the frequency of ROM exercises.",
+                "D. Educate the client about the importance of frequent position changes."
+            ],
+            correct: 2, // C
+            rationale: "To prevent disuse syndrome, ROM exercises must be provided at least four times a day, and care is taken to stretch the Achilles tendon with exercises. The client is repositioned frequently and is maintained in proper body alignment whether in bed or in a wheelchair. The client must be repositioned by caregivers, not just taught about repositioning. It is inappropriate to limit assistance for the sole purpose of preventing disuse syndrome. (PTS:1 REF:p.2082)"
+        },
+        {
+            id: 36,
+            question: "36. Splints have been prescribed for a client who is at risk of developing foot drop following a spinal cord injury. When should the nurse remove and reapply the splints?",
+            options: [
+                "A. At the client's request",
+                "B. Each morning and evening",
+                "C. Every 2 hours",
+                "D. One hour prior to mobility exercises"
+            ],
+            correct: 2, // C
+            rationale: "The feet are prone to foot drop; therefore, various types of splints are used to prevent foot drop. When used, the splints are removed and reapplied every 2 hours. (PTS:1 REF:p.2077)"
+        },
+        {
+            id: 37,
+            question: "37. A male client who is being treated in the hospital for a spinal cord injury (SCI) is advocating for the removal of the urinary catheter, stating that they want to try to resume normal elimination. What principle should guide the care team's decision regarding this intervention?",
+            options: [
+                "A. Urinary catheter use often leads to urinary tract infections (UTIs).",
+                "B. Urinary function is permanently lost following an SCI.",
+                "C. Urinary catheters should not remain in place for more than 7 days.",
+                "D. Overuse of urinary catheters can exacerbate nerve damage."
+            ],
+            correct: 0, // A
+            rationale: "Catheter use does not cause nerve damage, although it is a major risk factor for UTIs. Bladder distention, a major cause of autonomic dysreflexia, can also cause trauma. For this reason, removal of a urinary catheter must be considered with caution. Extended use of urinary catheterization is often necessary following SCI. The effect of a spinal cord lesion on urinary function depends on the level of the injury. (PTS:1 REF:p.2078)"
+        },
+        {
+            id: 38,
+            question: "38. A client with spinal cord injury is ready to be discharged home. A family member asks the nurse to review potential complications one more time. What are the potential complications that should be monitored for in this client? Select all that apply.",
+            options: [
+                "A. Orthostatic hypotension",
+                "B. Autonomic dysreflexia",
+                "C. DVT",
+                "D. Salt-wasting syndrome",
+                "E. Increased ICP"
+            ],
+            correct: [0,1,2], // A, B, C
+            rationale: "For a spinal cord-injured client, based on the assessment data, potential complications that may develop include DVT, orthostatic hypotension, and autonomic dysreflexia. Salt-wasting syndrome and increased ICP are not typical complications following the immediate recovery period. (PTS:1 REF:p.2079)"
+        },
+        {
+            id: 39,
+            question: "39. The nurse recognizes that a client with a SCI is at risk for muscle spasticity. How can the nurse best prevent this complication of an SCI?",
+            options: [
+                "A. Position the client in a high-Fowler position when in bed.",
+                "B. Support the knees with a pillow when the client is in bed.",
+                "C. Perform passive ROM exercises as prescribed.",
+                "D. Administer NSAIDs as prescribed."
+            ],
+            correct: 2, // C
+            rationale: "Passive ROM exercises can prevent muscle spasticity following SCI. NSAIDs are not used for this purpose. Pillows and sitting upright do not directly address the client's risk of muscle spasticity. (PTS:1 REF:p.2084)"
+        },
+        {
+            id: 40,
+            question: "40. A client is admitted to the neurologic ICU with a C4 spinal cord injury. When writing the plan of care for this client, which of the following nursing diagnoses would the nurse prioritize in the immediate care of this client?",
+            options: [
+                "A. Risk for impaired skin integrity related to immobility and sensory loss",
+                "B. Impaired physical mobility related to loss of motor function",
+                "C. Ineffective breathing patterns related to weakness of the intercostal muscles",
+                "D. Urinary retention related to inability to void spontaneously"
+            ],
+            correct: 2, // C
+            rationale: "A nursing diagnosis related to breathing pattern would be the priority for this client. A C4 spinal cord injury will require ventilatory support, due to the diaphragm and intercostals being affected. The other nursing diagnoses would be used in the care plan, but not designated as a higher priority than ineffective breathing patterns. (PTS:1 REF:p.2074)"
+        }
+    ];
+
+    let currentQuestion = 0;
+    let selectedOption = null;
+    let answers = Array(questions.length).fill(null);
+
+    function loadQuestion() {
+        const q = questions[currentQuestion];
+        if (!q) return;
+
+        const progress = ((currentQuestion + 1) / questions.length) * 100;
+        document.getElementById('progressBar').style.width = `${progress}%`;
+        document.getElementById('counter').textContent = `${currentQuestion + 1}/${questions.length}`;
+        document.getElementById('questionNumber').textContent = q.id;
+
+        document.getElementById('question').innerHTML = q.question;
+        loadOptions(q);
+
+        document.getElementById('feedback').style.display = 'none';
+        document.getElementById('rationale').classList.remove('show');
+        document.getElementById('cancelBtn').classList.remove('show');
+
+        document.getElementById('prevBtn').disabled = currentQuestion === 0;
+        const stored = answers[q.id - 1];
+        document.getElementById('nextBtn').disabled = stored === null || stored === undefined;
+        document.getElementById('nextBtn').textContent = currentQuestion >= questions.length - 1 ? 'Finish ➡️' : 'Next ➡️';
+    }
+
+    function loadOptions(q) {
+        const container = document.getElementById('options');
+        container.innerHTML = '';
+        q.options.forEach((opt, idx) => {
+            const div = document.createElement('div');
+            div.className = 'option';
+            div.innerHTML = `<div class="option-letter">${String.fromCharCode(65 + idx)}</div><div>${opt}</div>`;
+            div.onclick = () => selectOption(idx);
+            container.appendChild(div);
+        });
+
+        const saved = answers[q.id - 1];
+        if (saved !== null && saved !== undefined) {
+            selectOption(saved, true);
+        }
+    }
+
+    function selectOption(index, fromMemory = false) {
+        const q = questions[currentQuestion];
+        if (!fromMemory && selectedOption !== null) return;
+
+        if (!fromMemory) {
+            selectedOption = index;
+            answers[q.id - 1] = index;
+        }
+
+        highlightSelected(index, q);
+        showFeedback(index, q);
+        document.getElementById('nextBtn').disabled = false;
+        document.getElementById('cancelBtn').classList.add('show');
+    }
+
+    function highlightSelected(index, q) {
+        const opts = document.querySelectorAll('.option');
+        opts.forEach((opt, i) => opt.classList.remove('correct', 'incorrect'));
+
+        const correctIndices = Array.isArray(q.correct) ? q.correct : [q.correct];
+        if (Array.isArray(q.correct)) {
+            correctIndices.forEach(ci => opts[ci]?.classList.add('correct'));
+            if (!correctIndices.includes(index)) {
+                opts[index]?.classList.add('incorrect');
+            }
+        } else {
+            if (index === q.correct) {
+                opts[index].classList.add('correct');
+            } else {
+                opts[index].classList.add('incorrect');
+                opts[q.correct].classList.add('correct');
+            }
+        }
+    }
+
+    function showFeedback(index, q) {
+        const fb = document.getElementById('feedback');
+        const icon = document.getElementById('feedbackIcon');
+        const text = document.getElementById('feedbackText');
+        const rationaleDiv = document.getElementById('rationale');
+        const rationaleP = document.getElementById('rationaleText');
+
+        const correctIndices = Array.isArray(q.correct) ? q.correct : [q.correct];
+        const isCorrect = correctIndices.includes(index);
+
+        if (isCorrect) {
+            fb.className = 'feedback correct';
+            icon.textContent = '✅';
+            text.textContent = 'CORRECT! Well done.';
+        } else {
+            fb.className = 'feedback incorrect';
+            icon.textContent = '❌';
+            const letters = correctIndices.map(c => String.fromCharCode(65 + c)).join(', ');
+            text.textContent = `INCORRECT. The correct answer(s): ${letters}`;
+        }
+
+        fb.style.display = 'flex';
+        rationaleP.innerHTML = q.rationale;
+        rationaleDiv.classList.add('show');
+    }
+
+    function cancelSelection() {
+        const q = questions[currentQuestion];
+        selectedOption = null;
+        answers[q.id - 1] = null;
+        document.querySelectorAll('.option').forEach(opt => opt.classList.remove('correct', 'incorrect'));
+        document.getElementById('feedback').style.display = 'none';
+        document.getElementById('rationale').classList.remove('show');
+        document.getElementById('cancelBtn').classList.remove('show');
+        document.getElementById('nextBtn').disabled = true;
+    }
+
+    function nextCard() {
+        if (currentQuestion < questions.length - 1) {
+            currentQuestion++;
+            selectedOption = null;
+            loadQuestion();
+        } else {
+            currentQuestion = 0;
+            loadQuestion();
+        }
+    }
+
+    function previousCard() {
+        if (currentQuestion > 0) {
+            currentQuestion--;
+            const q = questions[currentQuestion];
+            selectedOption = answers[q.id - 1];
+            loadQuestion();
+        }
+    }
+
+    // keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+        if (e.key >= '1' && e.key <= '4') selectOption(parseInt(e.key)-1);
+        else if (e.key >= 'a' && e.key <= 'd') selectOption(e.key.charCodeAt(0)-97);
+        else if (e.key >= 'A' && e.key <= 'D') selectOption(e.key.charCodeAt(0)-65);
+        else if (e.key === 'ArrowLeft' && !document.getElementById('prevBtn').disabled) previousCard();
+        else if (e.key === 'ArrowRight' && !document.getElementById('nextBtn').disabled) nextCard();
+        else if (e.key === 'Escape' && document.getElementById('cancelBtn').classList.contains('show')) cancelSelection();
+    });
+
+    loadQuestion();
+</script>
+</body>
+</html>
